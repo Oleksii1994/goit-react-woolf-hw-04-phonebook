@@ -10,14 +10,10 @@ export function App() {
     JSON.parse(localStorage.getItem('contacts')) ?? []
   );
   const [filter, setFilter] = useState('');
-  const [visibleContacts, setVisibleContacts] = useState(
-    JSON.parse(localStorage.getItem('contacts')) ?? []
-  );
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
-    setVisibleContacts(getVisibleContacts(contacts, filter));
-  }, [contacts, filter]);
+  }, [contacts]);
 
   function formSubmitHandler(data) {
     for (const contact of contacts) {
@@ -58,7 +54,7 @@ export function App() {
         <Filter value={filter} onFilter={onFilter} />
         {contacts.length > 0 && (
           <ContactsList
-            contacts={visibleContacts}
+            contacts={getVisibleContacts(contacts, filter)}
             onDeleteContact={deleteContact}
           />
         )}

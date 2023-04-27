@@ -7,7 +7,7 @@ export function ContactForm({ onSubmit }) {
   const [number, setNumber] = useState('');
 
   function handleInputChange(e) {
-    const { name, value } = e.currentTarget;
+    const { name, value } = e.target;
     switch (name) {
       case 'name':
         setName(value);
@@ -24,12 +24,8 @@ export function ContactForm({ onSubmit }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const userObj = {
-      name: name,
-      number: number,
-    };
 
-    onSubmit(userObj);
+    onSubmit({ name, number });
 
     reset();
   }
