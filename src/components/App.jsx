@@ -21,11 +21,11 @@ export function App() {
         return Notiflix.Notify.failure(`${data.name} is already in contact`);
       } else if (data.number.toLowerCase() === contact.number.toLowerCase()) {
         return Notiflix.Notify.failure(`${data.number} is already in contact`);
+      } else {
+        setContacts([...contacts, { ...data, id: nanoid() }]);
+        return Notiflix.Notify.success('Contact added');
       }
     }
-
-    setContacts([...contacts, { ...data, id: nanoid() }]);
-    Notiflix.Notify.success('Contact added');
   }
 
   function onFilter(e) {
